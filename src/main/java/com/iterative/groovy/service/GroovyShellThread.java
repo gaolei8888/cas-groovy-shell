@@ -19,11 +19,16 @@ package com.iterative.groovy.service;
 import groovy.lang.Binding;
 import groovy.lang.GroovyClassLoader;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.filefilter.NameFileFilter;
 import org.codehaus.groovy.tools.shell.Groovysh;
 import org.codehaus.groovy.tools.shell.IO;
 import org.slf4j.Logger;
@@ -37,7 +42,6 @@ public final class GroovyShellThread extends Thread {
 
     private final Socket socket;
     private final Binding binding;
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     public GroovyShellThread(final Socket socket, final Binding binding) {
@@ -61,6 +65,7 @@ public final class GroovyShellThread extends Thread {
             
             final GroovyClassLoader loader = new GroovyClassLoader(this.getContextClassLoader());
             final IO io = new IO(in, out, out);
+                        
             final Groovysh gsh = new Groovysh(loader, binding, io);
             
             try {
@@ -89,4 +94,5 @@ public final class GroovyShellThread extends Thread {
     public Socket getSocket() {
         return socket;
     }
+    
 }
