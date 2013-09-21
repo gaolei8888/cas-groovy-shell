@@ -50,6 +50,16 @@ The shell is simply a wrapper around the `Groovysh` tool that is able to respond
     * Telnet Negotiation Mode: `Passive`
     * Session Logging: `All Session Output`
 
+Successful connection attempts should present the groovy shell prompt, that is:
+
+```groovy
+Groovy Shell (2.1.7, JVM: 1.7.0_25)
+Type 'help' or '\h' for help.
+-------------------------------------------------------------------------------------------------------------------------------------------
+groovy:000>
+
+```
+
 By default custom groovy scripts are loaded from `/etc/cas/scripts/`. You can change this of course by the `customScriptsLocation` setting as is shown above.
 
 
