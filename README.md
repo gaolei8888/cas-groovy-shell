@@ -11,8 +11,10 @@ There are no hard dependencies on the CAS server. The shell may be extracted to 
 
 # Versions
 
+```xml
     <cas.version>3.5.2</cas.version>
     <groovy.version>2.1.7</groovy.version>
+```
 
 # Deployment
 
@@ -28,12 +30,15 @@ or...
 
 The shell is simply a wrapper around the `Groovysh` tool that is able to respond to client requests by launching a separate thread for each. In the `groovyShellContext.xml` file By default, the groovy shell service listener component on the server side launches on startup and binds on the port `6789`:
 
+```xml
+
     <bean id="groovyShellService" class="com.iterative.groovy.service.GroovyShellService" 
           parent="groovyService">
         <property name="socket" value="${groovy.shell.socket.port:6789}" />
         <property name="launchAtStart" value="${groovy.shell.launch.startup:true}" />
         <property name="customScriptsLocation" value="${groovy.shell.scripts.path:/etc/cas/scripts/" />
     </bean>
+```
 
 ..which means that in order to connect, you could:
 
@@ -57,6 +62,7 @@ The following variables are available to the shell automatically:
 
 Extra bindings may also be provided in the `groovyShellContext.xml` file, such as:
 
+```xml
     <bean id="groovyService" abstract="true" init-method="initialize" destroy-method="destroy">
         <property name="bindings">
             <map>
@@ -65,6 +71,7 @@ Extra bindings may also be provided in the `groovyShellContext.xml` file, such a
             </map>
         </property>
     </bean>
+```
 
 # Executing Groovy Commands
 
@@ -72,11 +79,29 @@ Extra bindings may also be provided in the `groovyShellContext.xml` file, such a
 
 * Directly interact with the bindings. For instance you may inspect the `ticketRegistry` bean:
 
-
+```groovy
     groovy:000> ticketRegistry
     ===> org.jasig.cas.ticket.registry.DefaultTicketRegistry@bc1fe6
-    
+```
+
 All beans and their public APIs may be used by the shell to interact with the application context.
+
+# Custom Groovy Scripts
+
+The shell by default will compile and load all groovy scripts that are found at the `customScriptsLocation` path.
+Scripts are loaded by their class name and added to the shell binding collection. A sample `CasVersion` is provided
+that shows how a groovy script, with access to the application context may report back results about the webapp:
+
+```groovy
+groovy:000> CasVersion.run(ctx)
+
+CasVersion.run(ctx)
+===> CAS version: 3.5.2
+Ticket registry instance: DefaultTicketRegistry
+
+groovy:000>
+
+```
 
 
 
