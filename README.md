@@ -28,7 +28,9 @@ or...
 
 # Configuration
 
-The shell is simply a wrapper around the `Groovysh` tool that is able to respond to client requests by launching a separate thread for each. In the `groovyShellContext.xml` file By default, the groovy shell service listener component on the server side launches on startup and binds on the port `6789`:
+The shell is simply a wrapper around the `Groovysh` tool that is able to respond to client requests by 
+launching a separate thread for each. In the `groovyShellContext.xml` file by default, the groovy shell 
+service listener component on the server side launches on startup and binds on the port `6789`:
 
 ```xml
 <bean id="groovyShellService" class="com.iterative.groovy.service.GroovyShellService" 
