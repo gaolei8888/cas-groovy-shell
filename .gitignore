@@ -8,3 +8,7 @@ target/
 .idea
 overlays/
 
+# Package Files #
+*.jar
+*.war
+*.ear
