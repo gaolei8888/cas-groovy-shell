@@ -16,9 +16,6 @@
 
 package com.iterative.groovy.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import groovy.lang.Binding;
 import groovy.ui.Console;
 
