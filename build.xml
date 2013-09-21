@@ -24,6 +24,7 @@
 	<!-- ******************* PROPERTIES ************************* -->
 	<property environment="env" />
 	<property name="build.target.dir" value="target" />
+	<property name="cas.resources.dir" value="c:/etc/cas" />
 	
 	<property name="catalina.home" value="${env.CATALINA_HOME}" />
 	<property name="tomcat.log.patterns" value="**/*.log, **/*.txt" />
@@ -73,7 +74,7 @@
 		<delete file="${catalina.home}/bin/${ant.project.name}.log" verbose="false" failonerror="true" />
 		
 		<delete dir="${catalina.home}/webapps/${ant.project.name}" verbose="false" includeemptydirs="true" failonerror="true" />
-		<delete dir="/etc/cas/log" verbose="false" includeemptydirs="true" failonerror="true" />
+		<delete dir="${cas.resources.dir}/log" verbose="false" includeemptydirs="true" failonerror="true" />
 
 		<delete dir="${catalina.home}/work/Catalina" verbose="false" includeemptydirs="true"  failonerror="true"/>
 
@@ -104,6 +105,16 @@
 		      file="target/${ant.project.name}.war"
 			  verbose="true"
 		/>
+		<mkdir dir="${cas.resources.dir}" />
+        <copy overwrite="true" verbose="true" todir="${cas.resources.dir}" flatten="true">
+            <fileset dir="${basedir}/etc" includes="*.conf" />
+        </copy>
+        <copy overwrite="true" verbose="true" todir="${cas.resources.dir}" flatten="true">
+            <fileset dir="${basedir}/etc" includes="log4j.xml" />
+        </copy>
+        <copy overwrite="true" verbose="true" todir="${cas.resources.dir}" flatten="true">
+            <fileset dir="${basedir}/etc" includes="cas.properties" />
+        </copy>
 	</target>
 
 	<target name="package" description="Package src artifacts and prepare for deployment" depends="clean">
