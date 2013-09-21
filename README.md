@@ -1,4 +1,4 @@
-cas-groovy-shell
+cas-groovy-shell [![Build Status](https://travis-ci.org/UniconLabs/cas-groovy-shell.png?branch=master)](https://travis-ci.org/UniconLabs/cas-groovy-shell)
 ================
 
 A Groovy shell embedded inside the CAS server overlay.
