@@ -31,13 +31,12 @@ or...
 The shell is simply a wrapper around the `Groovysh` tool that is able to respond to client requests by launching a separate thread for each. In the `groovyShellContext.xml` file By default, the groovy shell service listener component on the server side launches on startup and binds on the port `6789`:
 
 ```xml
-
-    <bean id="groovyShellService" class="com.iterative.groovy.service.GroovyShellService" 
-          parent="groovyService">
-        <property name="socket" value="${groovy.shell.socket.port:6789}" />
-        <property name="launchAtStart" value="${groovy.shell.launch.startup:true}" />
-        <property name="customScriptsLocation" value="${groovy.shell.scripts.path:/etc/cas/scripts/" />
-    </bean>
+<bean id="groovyShellService" class="com.iterative.groovy.service.GroovyShellService" 
+      parent="groovyService">
+    <property name="socket" value="${groovy.shell.socket.port:6789}" />
+    <property name="launchAtStart" value="${groovy.shell.launch.startup:true}" />
+    <property name="customScriptsLocation" value="${groovy.shell.scripts.path:/etc/cas/scripts/" />
+</bean>
 ```
 
 ..which means that in order to connect, you could:
