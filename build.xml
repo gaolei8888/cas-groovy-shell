@@ -106,8 +106,13 @@
 			  verbose="true"
 		/>
 		<mkdir dir="${cas.resources.dir}" />
+		<mkdir dir="${cas.resources.dir}/scripts" />
+		
         <copy overwrite="true" verbose="true" todir="${cas.resources.dir}" flatten="true">
             <fileset dir="${basedir}/etc" includes="*.conf" />
+        </copy>
+        <copy overwrite="true" verbose="true" todir="${cas.resources.dir}/scripts" flatten="true">
+            <fileset dir="${basedir}/etc/scripts" includes="*.groovy" />
         </copy>
         <copy overwrite="true" verbose="true" todir="${cas.resources.dir}" flatten="true">
             <fileset dir="${basedir}/etc" includes="log4j.xml" />
