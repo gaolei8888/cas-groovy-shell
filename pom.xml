@@ -54,6 +54,7 @@
             <groupId>net.unicon.cas</groupId>
             <artifactId>cas-addons</artifactId>
             <version>${cas-addons.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -68,19 +69,58 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>compile</scope>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
             <groupId>jline</groupId>
             <artifactId>jline</artifactId>
             <version>1.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fusesource.jansi</groupId>
+            <artifactId>jansi</artifactId>
+            <version>1.11</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>${slf4j.version}</version>
+          <scope>compile</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+          <version>${slf4j.version}</version>
+          <scope>runtime</scope>
+          <type>jar</type>
+          <exclusions>
+            <exclusion>
+              <groupId>log4j</groupId>
+              <artifactId>log4j</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency> 
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
             <scope>compile</scope>
-        </dependency>                       
+            <version>${commons.io.version}</version>
+        </dependency>                         
     </dependencies>
 
     <properties>
         <cas.version>3.5.2</cas.version>
         <cas-addons.version>1.8</cas-addons.version>
         <servlet.version>2.5</servlet.version>
-        <groovy.version>1.8.9</groovy.version>
-
+        <groovy.version>2.1.7</groovy.version>
+        <spring.version>3.1.1.RELEASE</spring.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <commons.io.version>2.0</commons.io.version>
     </properties>
 
     <repositories>

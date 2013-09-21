@@ -22,17 +22,21 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * @author Bruce Fancher
  */
-public abstract class GroovyService {
+public abstract class GroovyService implements ApplicationContextAware {
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private Map<String, Object> bindings;
     private boolean launchAtStart;
     private Thread serverThread;
-
+    protected ApplicationContext context;
+    
     public GroovyService() {
         super();
     }
@@ -64,6 +68,19 @@ public abstract class GroovyService {
     protected Binding createBinding() {
         final Binding binding = new Binding();
 
+        final String[] beanNames = context.getBeanDefinitionNames();
+        logger.debug("Found [{}] beans in the application context", context.getBeanDefinitionCount());
+        
+        for (final String name : beanNames) {
+            
+            try {
+                binding.setVariable(name, context.getBean(name));
+                logger.debug("Added context bean [{}] to groovy bindings", name);
+            } catch (final Exception e) {
+                logger.warn("Could not add bean id [{}] to the binding. Reason: [{}]", name, e.getMessage());
+            }
+        }
+        
         if (bindings != null) {
             for (final Map.Entry<String, Object> nextBinding : bindings.entrySet()) {
                 
@@ -94,5 +111,10 @@ public abstract class GroovyService {
 
     public void setLaunchAtStart(final boolean launchAtStart) {
         this.launchAtStart = launchAtStart;
+    }
+
+    @Override
+    public void setApplicationContext(final ApplicationContext arg0) throws BeansException {
+        this.context = arg0;        
     }
 }

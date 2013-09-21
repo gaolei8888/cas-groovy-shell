@@ -7,23 +7,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
-    <bean id="contextWrapper" class="net.unicon.iamlabs.ApplicationContextWrapper" />
-    
-    <bean id="groovyService" abstract="true" init-method="initialize" destroy-method="destroy">
-        <property name="bindings">
-            <map>
-                <entry key="context" value-ref="contextWrapper" />
-                <entry key="ticketRegistry" value-ref="ticketRegistry" />
-                <entry key="messageSource" value-ref="messageSource" />
-                <entry key="servicesManager" value-ref="servicesManager" />
-                <entry key="tgtUidGenerator" value-ref="ticketGrantingTicketUniqueIdGenerator" />
-                <entry key="stUidGenerator" value-ref="serviceTicketUniqueIdGenerator" />
-                <entry key="ltUidGenerator" value-ref="loginTicketUniqueIdGenerator" />
-                <entry key="uidGeneratorsMap" value-ref="uniqueIdGeneratorsMap" />
-            </map>
-        </property>
-    </bean>
+    <bean id="groovyService" abstract="true" init-method="initialize" destroy-method="destroy" />
 
     <bean id="groovyShellService" class="com.iterative.groovy.service.GroovyShellService" 
           parent="groovyService">

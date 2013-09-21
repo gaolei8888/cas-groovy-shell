@@ -17,13 +17,14 @@
 package com.iterative.groovy.service;
 
 import groovy.lang.Binding;
-import groovy.ui.InteractiveShell;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.groovy.tools.shell.Groovysh;
+import org.codehaus.groovy.tools.shell.IO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,11 +58,12 @@ public final class GroovyShellThread extends Thread {
             binding.setVariable(OUT_KEY, out);
             logger.debug("Added output stream to binding collection as {}", OUT_KEY);
             
-            final InteractiveShell groovy = new InteractiveShell(binding, in, out, out);
-
+            final IO io = new IO(in, out, out);
+            final Groovysh gsh = new Groovysh(this.getContextClassLoader(), binding, io);
+            
             try {
                 logger.debug("Launching groovy interactive shell");
-                groovy.run();
+                gsh.run(new String[] {});
             } catch (final Exception e) {
                 logger.error(e.getMessage(), e);
             }
