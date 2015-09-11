@@ -70,7 +70,7 @@ public final class GroovyShellThread extends Thread {
             
             try {
                 logger.debug("Launching groovy interactive shell");
-                gsh.run(new String[] {});
+                gsh.run(new String());
             } catch (final Exception e) {
                 logger.error(e.getMessage(), e);
             }
